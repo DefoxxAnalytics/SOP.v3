@@ -1,0 +1,512 @@
+/**
+ * Decision Support Tool Styles
+ * AI-powered decision making interface
+ */
+
+.decision-tool-module {
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    margin: 2rem 0;
+    color: white;
+}
+
+.decision-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.decision-header h2 {
+    color: var(--accent-color);
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.decision-header p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1rem;
+}
+
+/* Scenario Selector */
+.scenario-selector {
+    margin-bottom: 2rem;
+}
+
+.scenario-selector h3 {
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+}
+
+.scenario-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.scenario-card {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.scenario-card:hover {
+    background: rgba(255, 255, 255, 0.12);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 212, 255, 0.2);
+    border-color: var(--accent-color);
+}
+
+.scenario-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.scenario-card h4 {
+    color: white;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.scenario-card p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.btn-select-scenario {
+    background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+    color: white;
+    border: none;
+    padding: 0.5rem 1.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-select-scenario:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 212, 255, 0.3);
+}
+
+/* Decision Workspace */
+.decision-workspace {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    animation: slideIn 0.5s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Questions Panel */
+.questions-panel {
+    background: rgba(30, 58, 95, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 1.5rem;
+}
+
+.questions-panel h3 {
+    color: var(--accent-color);
+    margin-bottom: 1.5rem;
+}
+
+.question-block {
+    margin-bottom: 1.5rem;
+}
+
+.question-label {
+    display: block;
+    color: white;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.question-input {
+    width: 100%;
+    padding: 0.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    color: white;
+    font-size: 1rem;
+}
+
+input[type="range"].question-input {
+    -webkit-appearance: none;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.2);
+    outline: none;
+    margin: 0.5rem 0;
+}
+
+input[type="range"].question-input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    background: var(--accent-color);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+input[type="range"].question-input::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: var(--accent-color);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.range-value {
+    display: inline-block;
+    margin-left: 1rem;
+    color: var(--accent-color);
+    font-weight: 600;
+    min-width: 50px;
+}
+
+select.question-input {
+    cursor: pointer;
+}
+
+select.question-input option {
+    background: #1f2937;
+    color: white;
+}
+
+input[type="number"].question-input {
+    width: 100px;
+}
+
+.btn-analyze {
+    width: 100%;
+    background: linear-gradient(135deg, #10b981, #06b6d4);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: all 0.3s ease;
+}
+
+.btn-analyze:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(16, 185, 129, 0.3);
+}
+
+.btn-reset {
+    width: 100%;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.btn-reset:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(99, 102, 241, 0.3);
+}
+
+/* Recommendations Panel */
+.recommendations-panel {
+    background: rgba(30, 58, 95, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 1.5rem;
+}
+
+.recommendations-panel h3 {
+    color: var(--accent-color);
+    margin-bottom: 1.5rem;
+}
+
+.placeholder {
+    color: rgba(255, 255, 255, 0.5);
+    font-style: italic;
+    text-align: center;
+    padding: 2rem;
+}
+
+.overall-score {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+}
+
+.overall-score h4 {
+    color: white;
+    margin-bottom: 1rem;
+}
+
+.score-display {
+    font-size: 3rem;
+    font-weight: bold;
+    padding: 1rem;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    position: relative;
+}
+
+.score-high {
+    background: linear-gradient(135deg, #10b981, #06b6d4);
+    color: white;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+}
+
+.score-medium {
+    background: linear-gradient(135deg, #f59e0b, #fbbf24);
+    color: white;
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+}
+
+.score-low {
+    background: linear-gradient(135deg, #ef4444, #f87171);
+    color: white;
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+}
+
+.recommendations-list {
+    margin-bottom: 2rem;
+}
+
+.recommendation-item {
+    background: rgba(255, 255, 255, 0.05);
+    border-left: 3px solid var(--accent-color);
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 0 8px 8px 0;
+}
+
+.rec-question {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+    margin-bottom: 0.25rem;
+}
+
+.rec-answer {
+    color: white;
+    margin-bottom: 0.5rem;
+}
+
+.rec-advice {
+    padding: 0.75rem;
+    border-radius: 6px;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+}
+
+.rec-advice.score-high {
+    background: rgba(16, 185, 129, 0.15);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.rec-advice.score-medium {
+    background: rgba(245, 158, 11, 0.15);
+    border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.rec-advice.score-low {
+    background: rgba(239, 68, 68, 0.15);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.rec-icon {
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+/* Action Plan */
+.action-plan {
+    background: rgba(0, 212, 255, 0.05);
+    border: 1px solid rgba(0, 212, 255, 0.2);
+    border-radius: 10px;
+    padding: 1.5rem;
+}
+
+.action-plan h4 {
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+}
+
+.action-plan ol {
+    margin-left: 1.5rem;
+}
+
+.action-plan li {
+    color: white;
+    margin-bottom: 0.75rem;
+}
+
+.action-critical {
+    color: #ff6b6b !important;
+}
+
+.action-warning {
+    color: #fbbf24 !important;
+}
+
+.action-good {
+    color: #10b981 !important;
+}
+
+.action-plan ul {
+    margin-top: 0.5rem;
+    margin-left: 1rem;
+}
+
+.action-plan ul li {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Decision History */
+.decision-history {
+    background: rgba(30, 58, 95, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.decision-history h3 {
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+}
+
+.history-list {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.history-item {
+    display: grid;
+    grid-template-columns: 2fr 2fr 1fr;
+    gap: 1rem;
+    padding: 0.75rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+    margin-bottom: 0.5rem;
+}
+
+.history-time {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+}
+
+.history-scenario {
+    color: white;
+}
+
+.history-score {
+    text-align: right;
+    font-weight: 600;
+    color: var(--accent-color);
+}
+
+/* Best Practices */
+.best-practices {
+    margin-top: 2rem;
+}
+
+.best-practices h3 {
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+}
+
+.practice-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.practice-card {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    padding: 1rem;
+    transition: all 0.3s ease;
+}
+
+.practice-card:hover {
+    background: rgba(255, 255, 255, 0.12);
+    transform: translateY(-2px);
+}
+
+.practice-card h4 {
+    color: var(--accent-color);
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+.practice-card p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (max-width: 968px) {
+    .decision-workspace {
+        grid-template-columns: 1fr;
+    }
+    
+    .scenario-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    .practice-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Scrollbar styling for history */
+.history-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.history-list::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 3px;
+}
+
+.history-list::-webkit-scrollbar-thumb {
+    background: var(--accent-color);
+    border-radius: 3px;
+}
+
+.history-list::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary-color);
+}

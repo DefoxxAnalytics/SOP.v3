@@ -1,0 +1,1502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vendor Spend Analysis - Ultra-Compact Quick Reference</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #1e3a5f;
+            --secondary: #4a7ba7;
+            --accent: #00d4ff;
+            --success: #28a745;
+            --warning: #ffc107;
+            --danger: #dc3545;
+            --info: #17a2b8;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --border: #dee2e6;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --text-primary: #212529;
+            --text-secondary: #6c757d;
+            --shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #1a1a1a;
+            --bg-secondary: #2d2d2d;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+            --border: #404040;
+            --shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-size: 13px;
+            line-height: 1.4;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+        
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 8px 16px;
+            box-shadow: var(--shadow);
+        }
+        
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .logo-section img {
+            width: 32px;
+            height: auto;
+        }
+        
+        .header h1 {
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .search-box {
+            position: relative;
+            width: 240px;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 6px 12px 6px 32px;
+            border: none;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            font-size: 12px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .search-box input::placeholder {
+            color: rgba(255,255,255,0.7);
+        }
+        
+        .search-box i {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255,255,255,0.7);
+        }
+        
+        .theme-toggle {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            padding: 8px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .theme-toggle:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        
+        .nav-tabs {
+            position: sticky;
+            top: 56px;
+            z-index: 999;
+            background: var(--bg-primary);
+            border-bottom: 1px solid var(--border);
+            padding: 0 16px;
+            display: flex;
+            overflow-x: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        
+        .nav-tabs::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .nav-tab {
+            background: none;
+            border: none;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .nav-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+        
+        .nav-tab:hover:not(.active) {
+            color: var(--text-primary);
+            background: var(--bg-secondary);
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 16px;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        
+        .compact-card {
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+        
+        .compact-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        }
+        
+        .card-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 8px 12px;
+            display: flex;
+            align-items: center;
+            justify-content: between;
+            gap: 8px;
+        }
+        
+        .card-header h3 {
+            font-size: 13px;
+            font-weight: 600;
+            flex: 1;
+        }
+        
+        .card-body {
+            padding: 12px;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: 12px;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .badge-critical { background: var(--danger); color: white; }
+        .badge-high { background: var(--warning); color: var(--dark); }
+        .badge-medium { background: var(--info); color: white; }
+        .badge-low { background: var(--success); color: white; }
+        
+        .timeline-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 8px;
+        }
+        
+        .timeline-item {
+            background: var(--bg-secondary);
+            padding: 8px;
+            border-radius: 6px;
+            border-left: 3px solid var(--primary);
+            transition: all 0.3s ease;
+        }
+        
+        .timeline-item:hover {
+            transform: translateX(3px);
+        }
+        
+        .timeline-day {
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 11px;
+        }
+        
+        .timeline-task {
+            font-size: 11px;
+            color: var(--text-secondary);
+            margin-top: 2px;
+        }
+        
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 11px;
+        }
+        
+        .data-table th,
+        .data-table td {
+            padding: 6px 8px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .data-table th {
+            background: var(--bg-secondary);
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .data-table tr:hover {
+            background: var(--bg-secondary);
+        }
+        
+        .required {
+            color: var(--danger);
+            font-weight: bold;
+        }
+        
+        .formula-container {
+            background: var(--dark);
+            color: var(--light);
+            border-radius: 6px;
+            margin: 8px 0;
+            position: relative;
+        }
+        
+        .formula-header {
+            padding: 6px 12px;
+            background: rgba(255,255,255,0.1);
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        
+        .copy-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 4px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .copy-btn:hover {
+            background: var(--secondary);
+        }
+        
+        .formula-code {
+            padding: 8px 12px;
+            font-family: 'Courier New', monospace;
+            font-size: 11px;
+            white-space: pre-wrap;
+            overflow-x: auto;
+        }
+        
+        .savings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 8px;
+        }
+        
+        .savings-item {
+            background: var(--bg-secondary);
+            padding: 8px;
+            border-radius: 6px;
+            border-top: 2px solid var(--success);
+            text-align: center;
+        }
+        
+        .savings-label {
+            font-weight: 600;
+            font-size: 11px;
+            margin-bottom: 4px;
+        }
+        
+        .savings-range {
+            color: var(--success);
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .savings-method {
+            color: var(--text-secondary);
+            font-size: 10px;
+            margin-top: 2px;
+        }
+        
+        .checklist {
+            list-style: none;
+        }
+        
+        .checklist li {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 4px 0;
+            font-size: 11px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .checklist li:hover {
+            background: var(--bg-secondary);
+            padding-left: 8px;
+            margin-left: -8px;
+            border-radius: 4px;
+        }
+        
+        .checkbox {
+            width: 14px;
+            height: 14px;
+            border: 1px solid var(--primary);
+            border-radius: 3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .checkbox.checked {
+            background: var(--success);
+            border-color: var(--success);
+            color: white;
+        }
+        
+        .alert {
+            padding: 8px 12px;
+            border-radius: 6px;
+            margin: 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        
+        .alert-danger {
+            background: rgba(220, 53, 69, 0.1);
+            border-left: 3px solid var(--danger);
+            color: var(--danger);
+        }
+        
+        .alert-warning {
+            background: rgba(255, 193, 7, 0.1);
+            border-left: 3px solid var(--warning);
+            color: #856404;
+        }
+        
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 8px;
+        }
+        
+        .tip-card {
+            background: var(--bg-secondary);
+            padding: 10px;
+            border-radius: 6px;
+            border-left: 3px solid var(--info);
+        }
+        
+        .tip-number {
+            background: var(--primary);
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
+        
+        .tip-title {
+            font-weight: 600;
+            font-size: 11px;
+            margin-bottom: 4px;
+        }
+        
+        .tip-text {
+            font-size: 10px;
+            color: var(--text-secondary);
+        }
+        
+        .category-tree {
+            font-size: 11px;
+        }
+        
+        .category-level {
+            margin-left: 16px;
+            padding: 2px 0;
+        }
+        
+        .category-level:before {
+            content: "├─ ";
+            color: var(--text-secondary);
+        }
+        
+        .level-0 { margin-left: 0; font-weight: 600; }
+        .level-0:before { content: ""; }
+        .level-1 { color: var(--primary); }
+        .level-2 { color: var(--secondary); }
+        .level-3 { color: var(--text-secondary); }
+        
+        .red-flags {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 8px;
+        }
+        
+        .red-flag {
+            background: rgba(220, 53, 69, 0.1);
+            border: 1px solid var(--danger);
+            border-radius: 6px;
+            padding: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .red-flag i {
+            color: var(--danger);
+        }
+        
+        .red-flag-text {
+            font-size: 11px;
+            font-weight: 600;
+        }
+        
+        .visualization-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 6px;
+        }
+        
+        .viz-item {
+            background: var(--bg-secondary);
+            padding: 6px 10px;
+            border-radius: 4px;
+            border-left: 2px solid var(--accent);
+            font-size: 11px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .collapsible-header {
+            cursor: pointer;
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border);
+            user-select: none;
+        }
+        
+        .collapsible-header:hover {
+            background: var(--bg-secondary);
+            margin: 0 -12px;
+            padding: 8px 12px;
+            border-radius: 4px;
+        }
+        
+        .collapsible-content {
+            display: none;
+            padding: 8px 0;
+        }
+        
+        .collapsible-content.open {
+            display: block;
+        }
+        
+        .toggle-icon {
+            transition: transform 0.3s ease;
+        }
+        
+        .toggle-icon.rotated {
+            transform: rotate(90deg);
+        }
+        
+        @media (max-width: 768px) {
+            .header-controls {
+                gap: 8px;
+            }
+            
+            .search-box {
+                width: 160px;
+            }
+            
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 8px;
+            }
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body data-theme="light">
+    <div class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <img src="../assets/images/vtx_logo_white.png" alt="Versatex Logo">
+                <h1>Ultra-Compact Quick Reference</h1>
+            </div>
+            <div class="header-controls">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Search content...">
+                </div>
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <nav class="nav-tabs">
+        <button class="nav-tab active" data-tab="timeline">
+            <i class="fas fa-clock"></i> Timeline
+        </button>
+        <button class="nav-tab" data-tab="fields">
+            <i class="fas fa-database"></i> Fields
+        </button>
+        <button class="nav-tab" data-tab="formulas">
+            <i class="fas fa-calculator"></i> Formulas
+        </button>
+        <button class="nav-tab" data-tab="categories">
+            <i class="fas fa-sitemap"></i> Categories
+        </button>
+        <button class="nav-tab" data-tab="savings">
+            <i class="fas fa-piggy-bank"></i> Savings
+        </button>
+        <button class="nav-tab" data-tab="flags">
+            <i class="fas fa-exclamation-triangle"></i> Red Flags
+        </button>
+        <button class="nav-tab" data-tab="powerbi">
+            <i class="fas fa-chart-bar"></i> Power BI
+        </button>
+        <button class="nav-tab" data-tab="gates">
+            <i class="fas fa-flag-checkered"></i> Gates
+        </button>
+        <button class="nav-tab" data-tab="pitfalls">
+            <i class="fas fa-bug"></i> Pitfalls
+        </button>
+    </nav>
+    
+    <div class="container">
+        <!-- Timeline Tab -->
+        <div class="tab-content active" id="timeline">
+            <div class="compact-card">
+                <div class="card-header">
+                    <h3><i class="fas fa-calendar-alt"></i> 22-Day Critical Path</h3>
+                    <span class="badge badge-critical">CRITICAL</span>
+                </div>
+                <div class="card-body">
+                    <div class="timeline-grid">
+                        <div class="timeline-item">
+                            <div class="timeline-day">Days 1-2</div>
+                            <div class="timeline-task">Setup & Prerequisites</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-day">Days 3-5</div>
+                            <div class="timeline-task">Data Collection</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-day">Days 6-8</div>
+                            <div class="timeline-task">Quality Assessment</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-day">Days 9-13</div>
+                            <div class="timeline-task">Categorization</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-day">Days 14-17</div>
+                            <div class="timeline-task">Analysis & Dashboard</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-day">Days 18-20</div>
+                            <div class="timeline-task">Recommendations</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-day">Days 21-22</div>
+                            <div class="timeline-task">Final Delivery</div>
+                        </div>
+                    </div>
+                    <div class="alert alert-danger">
+                        <i class="fas fa-exclamation-circle"></i>
+                        Days 9-13 are CRITICAL - Categorization makes or breaks the analysis
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Fields Tab -->
+        <div class="tab-content" id="fields">
+            <div class="compact-card">
+                <div class="card-header">
+                    <h3><i class="fas fa-database"></i> Required Data Fields</h3>
+                    <span class="badge badge-critical">MANDATORY</span>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-danger">
+                        <i class="fas fa-stop"></i>
+                        STOP if any field is <95% complete
+                    </div>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Field</th>
+                                <th>Quality Check</th>
+                                <th>Critical?</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="required">*</span> Transaction ID</td>
+                                <td>No nulls, unique</td>
+                                <td><i class="fas fa-check" style="color: var(--success)"></i></td>
+                            </tr>
+                            <tr>
+                                <td><span class="required">*</span> Supplier Name</td>
+                                <td>Standardized format</td>
+                                <td><i class="fas fa-check" style="color: var(--success)"></i></td>
+                            </tr>
+                            <tr>
+                                <td><span class="required">*</span> Supplier ID</td>
+                                <td>Matches master data</td>
+                                <td><i class="fas fa-check" style="color: var(--success)"></i></td>
+                            </tr>
+                            <tr>
+                                <td><span class="required">*</span> Spend Amount</td>
+                                <td>No nulls/zeros</td>
+                                <td><i class="fas fa-check" style="color: var(--success)"></i></td>
+                            </tr>
+                            <tr>
+                                <td><span class="required">*</span> Currency</td>
+                                <td>Valid ISO codes</td>
+                                <td><i class="fas fa-check" style="color: var(--success)"></i></td>
+                            </tr>
+                            <tr>
+                                <td><span class="required">*</span> Transaction Date</td>
+                                <td>YYYY-MM-DD format</td>
+                                <td><i class="fas fa-check" style="color: var(--success)"></i></td>
+                            </tr>
+                            <tr>
+                                <td><span class="required">*</span> Description</td>
+                                <td>Min 10 characters</td>
+                                <td><i class="fas fa-check" style="color: var(--success)"></i></td>
+                            </tr>
+                            <tr>
+                                <td>GL Account</td>
+                                <td>Valid format</td>
+                                <td><i class="fas fa-minus" style="color: var(--warning)"></i></td>
+                            </tr>
+                            <tr>
+                                <td>PO Number</td>
+                                <td>If available</td>
+                                <td><i class="fas fa-minus" style="color: var(--warning)"></i></td>
+                            </tr>
+                            <tr>
+                                <td>Cost Center</td>
+                                <td>If available</td>
+                                <td><i class="fas fa-minus" style="color: var(--warning)"></i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Formulas Tab -->
+        <div class="tab-content" id="formulas">
+            <div class="card-grid">
+                <div class="compact-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-calculator"></i> Core Analysis Formulas</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="formula-container">
+                            <div class="formula-header">
+                                <span>Spend Analysis Basics</span>
+                                <button class="copy-btn" onclick="copyFormula(this)">Copy</button>
+                            </div>
+                            <div class="formula-code">Addressable Spend = Total - Tax - Non-Influenceable
+Savings Potential = Addressable × 15%
+Vendor Concentration = Top 10 Vendors / Total Spend
+Maverick Spend % = Non-PO Spend / Total Spend
+Contract Coverage = Contract Spend / Total Spend</div>
+                        </div>
+                        
+                        <div class="formula-container">
+                            <div class="formula-header">
+                                <span>Pareto Analysis</span>
+                                <button class="copy-btn" onclick="copyFormula(this)">Copy</button>
+                            </div>
+                            <div class="formula-code">80/20 Rule Check:
+- Top 20% vendors should = 80% spend
+- Top 10 vendors should = 50%+ spend
+- Tail spend (bottom 50%) should be <10%</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="compact-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-code"></i> SQL Quick Checks</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="formula-container">
+                            <div class="formula-header">
+                                <span>Find Duplicates</span>
+                                <button class="copy-btn" onclick="copyFormula(this)">Copy</button>
+                            </div>
+                            <div class="formula-code">SELECT invoice_number, COUNT(*) as count
+FROM transactions 
+GROUP BY invoice_number 
+HAVING COUNT(*) > 1
+ORDER BY count DESC;</div>
+                        </div>
+                        
+                        <div class="formula-container">
+                            <div class="formula-header">
+                                <span>Data Completeness</span>
+                                <button class="copy-btn" onclick="copyFormula(this)">Copy</button>
+                            </div>
+                            <div class="formula-code">SELECT 
+  COUNT(*) as total_records,
+  COUNT(supplier_name) as has_supplier,
+  COUNT(amount) as has_amount,
+  COUNT(transaction_date) as has_date
+FROM transactions;</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Categories Tab -->
+        <div class="tab-content" id="categories">
+            <div class="compact-card">
+                <div class="card-header">
+                    <h3><i class="fas fa-sitemap"></i> 5-Level Categorization Framework</h3>
+                    <span class="badge badge-high">ESSENTIAL</span>
+                </div>
+                <div class="card-body">
+                    <div class="category-tree">
+                        <div class="category-level level-0">Level 1: Business Function (100% required)</div>
+                        <div class="category-level level-1">├─ Operations</div>
+                        <div class="category-level level-1">├─ Sales & Marketing</div>
+                        <div class="category-level level-1">├─ IT & Technology</div>
+                        <div class="category-level level-1">├─ Facilities & Real Estate</div>
+                        <div class="category-level level-1">├─ Professional Services</div>
+                        <div class="category-level level-1">└─ Other</div>
+                        
+                        <div class="category-level level-0">Level 2: Category (100% required)</div>
+                        <div class="category-level level-2">└─ Specific business categories</div>
+                        
+                        <div class="category-level level-0">Level 3: Subcategory (95% required)</div>
+                        <div class="category-level level-3">└─ Detailed subcategories</div>
+                        
+                        <div class="category-level level-0">Level 4: Commodity (80% target)</div>
+                        <div class="category-level level-3">└─ Specific products/services</div>
+                        
+                        <div class="category-level level-0">Level 5: Sub-commodity (Optional)</div>
+                        <div class="category-level level-3">└─ Granular specifications</div>
+                    </div>
+                    
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        Never exceed 5% "Uncategorized" - this indicates poor data quality
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Savings Tab -->
+        <div class="tab-content" id="savings">
+            <div class="compact-card">
+                <div class="card-header">
+                    <h3><i class="fas fa-piggy-bank"></i> Savings Opportunity Matrix</h3>
+                    <span class="badge badge-success">HIGH ROI</span>
+                </div>
+                <div class="card-body">
+                    <div class="savings-grid">
+                        <div class="savings-item">
+                            <div class="savings-label">Vendor Consolidation</div>
+                            <div class="savings-range">10-15%</div>
+                            <div class="savings-method">Multiple vendors, same category</div>
+                        </div>
+                        <div class="savings-item">
+                            <div class="savings-label">Contract Compliance</div>
+                            <div class="savings-range">15-20%</div>
+                            <div class="savings-method">Off-contract spending</div>
+                        </div>
+                        <div class="savings-item">
+                            <div class="savings-label">Volume Discounts</div>
+                            <div class="savings-range">5-10%</div>
+                            <div class="savings-method">Fragmented purchases</div>
+                        </div>
+                        <div class="savings-item">
+                            <div class="savings-label">Specification Review</div>
+                            <div class="savings-range">10-25%</div>
+                            <div class="savings-method">Over-specified products</div>
+                        </div>
+                        <div class="savings-item">
+                            <div class="savings-label">Payment Terms</div>
+                            <div class="savings-range">1-2%</div>
+                            <div class="savings-method">Early pay discounts</div>
+                        </div>
+                        <div class="savings-item">
+                            <div class="savings-label">Demand Management</div>
+                            <div class="savings-range">5-15%</div>
+                            <div class="savings-method">Reduce consumption</div>
+                        </div>
+                        <div class="savings-item">
+                            <div class="savings-label">Process Automation</div>
+                            <div class="savings-range">8-12%</div>
+                            <div class="savings-method">Reduce manual processes</div>
+                        </div>
+                        <div class="savings-item">
+                            <div class="savings-label">Market Testing</div>
+                            <div class="savings-range">10-20%</div>
+                            <div class="savings-method">Competitive bidding</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Red Flags Tab -->
+        <div class="tab-content" id="flags">
+            <div class="compact-card">
+                <div class="card-header">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Red Flags to Watch</h3>
+                    <span class="badge badge-danger">CRITICAL</span>
+                </div>
+                <div class="card-body">
+                    <div class="red-flags">
+                        <div class="red-flag">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <div class="red-flag-text">>50% spend with single vendor</div>
+                        </div>
+                        <div class="red-flag">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <div class="red-flag-text">>30% maverick spend</div>
+                        </div>
+                        <div class="red-flag">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <div class="red-flag-text">Missing PO numbers</div>
+                        </div>
+                        <div class="red-flag">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <div class="red-flag-text">Duplicate supplier names</div>
+                        </div>
+                        <div class="red-flag">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <div class="red-flag-text">Round number spending</div>
+                        </div>
+                        <div class="red-flag">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <div class="red-flag-text">Weekend transactions</div>
+                        </div>
+                        <div class="red-flag">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <div class="red-flag-text">Same-day invoice & payment</div>
+                        </div>
+                        <div class="red-flag">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <div class="red-flag-text">>10% "Other" category</div>
+                        </div>
+                        <div class="red-flag">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <div class="red-flag-text">Unusual payment terms</div>
+                        </div>
+                        <div class="red-flag">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <div class="red-flag-text">Price variations >20%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Power BI Tab -->
+        <div class="tab-content" id="powerbi">
+            <div class="card-grid">
+                <div class="compact-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-chart-bar"></i> Essential Visualizations</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="visualization-list">
+                            <div class="viz-item">
+                                <i class="fas fa-chart-pie"></i>
+                                Spend by Category (Pie)
+                            </div>
+                            <div class="viz-item">
+                                <i class="fas fa-chart-bar"></i>
+                                Top 20 Suppliers (Bar)
+                            </div>
+                            <div class="viz-item">
+                                <i class="fas fa-chart-line"></i>
+                                Spend Trend (Line)
+                            </div>
+                            <div class="viz-item">
+                                <i class="fas fa-table"></i>
+                                Supplier Summary (Table)
+                            </div>
+                            <div class="viz-item">
+                                <i class="fas fa-chart-area"></i>
+                                Monthly Spend (Area)
+                            </div>
+                            <div class="viz-item">
+                                <i class="fas fa-chart-scatter"></i>
+                                Price Analysis (Scatter)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="compact-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-tachometer-alt"></i> Key Metrics Cards</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="visualization-list">
+                            <div class="viz-item">
+                                <i class="fas fa-dollar-sign"></i>
+                                Total Spend
+                            </div>
+                            <div class="viz-item">
+                                <i class="fas fa-building"></i>
+                                Active Suppliers
+                            </div>
+                            <div class="viz-item">
+                                <i class="fas fa-percentage"></i>
+                                Savings Potential
+                            </div>
+                            <div class="viz-item">
+                                <i class="fas fa-file-contract"></i>
+                                Contract Coverage
+                            </div>
+                            <div class="viz-item">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                Maverick Spend %
+                            </div>
+                            <div class="viz-item">
+                                <i class="fas fa-compress"></i>
+                                Concentration Risk
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Quality Gates Tab -->
+        <div class="tab-content" id="gates">
+            <div class="card-grid">
+                <div class="compact-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-flag-checkered"></i> Data Collection Gates</h3>
+                        <span class="badge badge-critical">GO/NO-GO</span>
+                    </div>
+                    <div class="card-body">
+                        <ul class="checklist">
+                            <li onclick="toggleCheck(this)">
+                                <div class="checkbox"></div>
+                                12+ months of data available
+                            </li>
+                            <li onclick="toggleCheck(this)">
+                                <div class="checkbox"></div>
+                                80%+ of total spend included
+                            </li>
+                            <li onclick="toggleCheck(this)">
+                                <div class="checkbox"></div>
+                                All critical fields present
+                            </li>
+                            <li onclick="toggleCheck(this)">
+                                <div class="checkbox"></div>
+                                Data quality >95%
+                            </li>
+                            <li onclick="toggleCheck(this)">
+                                <div class="checkbox"></div>
+                                Stakeholder sign-off obtained
+                            </li>
+                        </ul>
+                        <div class="alert alert-danger">
+                            <i class="fas fa-stop"></i>
+                            STOP if any item unchecked
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="compact-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-sitemap"></i> Categorization Gates</h3>
+                        <span class="badge badge-high">QUALITY</span>
+                    </div>
+                    <div class="card-body">
+                        <ul class="checklist">
+                            <li onclick="toggleCheck(this)">
+                                <div class="checkbox"></div>
+                                100% Level 1-2 complete
+                            </li>
+                            <li onclick="toggleCheck(this)">
+                                <div class="checkbox"></div>
+                                95%+ Level 3 complete
+                            </li>
+                            <li onclick="toggleCheck(this)">
+                                <div class="checkbox"></div>
+                                <5% "Uncategorized"
+                            </li>
+                            <li onclick="toggleCheck(this)">
+                                <div class="checkbox"></div>
+                                SME validation complete
+                            </li>
+                            <li onclick="toggleCheck(this)">
+                                <div class="checkbox"></div>
+                                Taxonomy documented
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="compact-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-chart-line"></i> Analysis Gates</h3>
+                        <span class="badge badge-medium">INSIGHTS</span>
+                    </div>
+                    <div class="card-body">
+                        <ul class="checklist">
+                            <li onclick="toggleCheck(this)">
+                                <div class="checkbox"></div>
+                                Pareto analysis complete
+                            </li>
+                            <li onclick="toggleCheck(this)">
+                                <div class="checkbox"></div>
+                                Savings opportunities identified
+                            </li>
+                            <li onclick="toggleCheck(this)">
+                                <div class="checkbox"></div>
+                                Risk assessment done
+                            </li>
+                            <li onclick="toggleCheck(this)">
+                                <div class="checkbox"></div>
+                                Benchmarks included
+                            </li>
+                            <li onclick="toggleCheck(this)">
+                                <div class="checkbox"></div>
+                                Recommendations prioritized
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Pitfalls Tab -->
+        <div class="tab-content" id="pitfalls">
+            <div class="compact-card">
+                <div class="card-header">
+                    <h3><i class="fas fa-bug"></i> Common Pitfalls & Solutions</h3>
+                    <span class="badge badge-warning">AVOID</span>
+                </div>
+                <div class="card-body">
+                    <div class="tips-grid">
+                        <div class="tip-card">
+                            <div class="tip-number">1</div>
+                            <div class="tip-title">Analysis Paralysis</div>
+                            <div class="tip-text">Focus on top 80% of spend first</div>
+                        </div>
+                        <div class="tip-card">
+                            <div class="tip-number">2</div>
+                            <div class="tip-title">Perfect Data Myth</div>
+                            <div class="tip-text">95% quality is good enough to start</div>
+                        </div>
+                        <div class="tip-card">
+                            <div class="tip-number">3</div>
+                            <div class="tip-title">Over-Categorization</div>
+                            <div class="tip-text">5 levels maximum - don't go deeper</div>
+                        </div>
+                        <div class="tip-card">
+                            <div class="tip-number">4</div>
+                            <div class="tip-title">Ignoring SMEs</div>
+                            <div class="tip-text">Always validate with subject experts</div>
+                        </div>
+                        <div class="tip-card">
+                            <div class="tip-number">5</div>
+                            <div class="tip-title">No Assumptions Log</div>
+                            <div class="tip-text">Document every decision and rationale</div>
+                        </div>
+                        <div class="tip-card">
+                            <div class="tip-number">6</div>
+                            <div class="tip-title">Unrealistic Savings</div>
+                            <div class="tip-text">Use conservative estimates, show ranges</div>
+                        </div>
+                        <div class="tip-card">
+                            <div class="tip-number">7</div>
+                            <div class="tip-title">Missing Quick Wins</div>
+                            <div class="tip-text">Identify 90-day opportunities early</div>
+                        </div>
+                        <div class="tip-card">
+                            <div class="tip-number">8</div>
+                            <div class="tip-title">Static Analysis</div>
+                            <div class="tip-text">Build dynamic dashboards for ongoing use</div>
+                        </div>
+                        <div class="tip-card">
+                            <div class="tip-number">9</div>
+                            <div class="tip-title">No Implementation Plan</div>
+                            <div class="tip-text">Always include actionable next steps</div>
+                        </div>
+                        <div class="tip-card">
+                            <div class="tip-number">10</div>
+                            <div class="tip-title">Poor Stakeholder Buy-in</div>
+                            <div class="tip-text">Involve key users in validation process</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        let isDark = false;
+        
+        themeToggle.addEventListener('click', () => {
+            isDark = !isDark;
+            body.setAttribute('data-theme', isDark ? 'dark' : 'light');
+            themeToggle.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        });
+        
+        // Tab Navigation
+        const tabs = document.querySelectorAll('.nav-tab');
+        const contents = document.querySelectorAll('.tab-content');
+        
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active from all tabs and contents
+                tabs.forEach(t => t.classList.remove('active'));
+                contents.forEach(c => c.classList.remove('active'));
+                
+                // Add active to clicked tab and corresponding content
+                tab.classList.add('active');
+                document.getElementById(tab.dataset.tab).classList.add('active');
+            });
+        });
+        
+        // Search Functionality
+        const searchInput = document.getElementById('searchInput');
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const cards = document.querySelectorAll('.compact-card, .tip-card, .savings-item, .red-flag');
+            
+            cards.forEach(card => {
+                const text = card.textContent.toLowerCase();
+                if (searchTerm === '' || text.includes(searchTerm)) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+        });
+        
+        // Checklist Toggle
+        function toggleCheck(item) {
+            const checkbox = item.querySelector('.checkbox');
+            checkbox.classList.toggle('checked');
+            if (checkbox.classList.contains('checked')) {
+                checkbox.innerHTML = '<i class="fas fa-check"></i>';
+            } else {
+                checkbox.innerHTML = '';
+            }
+        }
+        
+        // Copy Formula Function
+        function copyFormula(button) {
+            const code = button.parentElement.nextElementSibling.textContent;
+            navigator.clipboard.writeText(code).then(() => {
+                button.textContent = 'Copied!';
+                setTimeout(() => {
+                    button.textContent = 'Copy';
+                }, 2000);
+            });
+        }
+        
+        // Collapsible Sections
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('collapsible-header')) {
+                const content = e.target.nextElementSibling;
+                const icon = e.target.querySelector('.toggle-icon');
+                
+                content.classList.toggle('open');
+                icon.classList.toggle('rotated');
+            }
+        });
+        
+        // Keyboard Shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey || e.metaKey) {
+                switch(e.key) {
+                    case 'k':
+                        e.preventDefault();
+                        searchInput.focus();
+                        break;
+                    case 'd':
+                        e.preventDefault();
+                        themeToggle.click();
+                        break;
+                }
+            }
+            
+            // Tab navigation with numbers
+            if (e.key >= '1' && e.key <= '9') {
+                const tabIndex = parseInt(e.key) - 1;
+                if (tabs[tabIndex]) {
+                    tabs[tabIndex].click();
+                }
+            }
+        });
+        
+        // Auto-save checklist state
+        const checkboxes = document.querySelectorAll('.checkbox');
+        checkboxes.forEach((checkbox, index) => {
+            const saved = localStorage.getItem(`checkbox-${index}`);
+            if (saved === 'true') {
+                checkbox.classList.add('checked');
+                checkbox.innerHTML = '<i class="fas fa-check"></i>';
+            }
+            
+            checkbox.addEventListener('click', () => {
+                localStorage.setItem(`checkbox-${index}`, checkbox.classList.contains('checked'));
+            });
+        });
+    </script>
+    
+    <!-- Footer -->
+    <footer style="
+        background: white;
+        margin-top: 40px;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    ">
+        <div style="
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        ">
+            <!-- Navigation Links -->
+            <div style="
+                display: flex;
+                gap: 30px;
+                flex-wrap: wrap;
+            ">
+                <a href="../index.html" style="
+                    color: #1e3a5f;
+                    text-decoration: none;
+                    font-size: 14px;
+                    display: flex;
+                    align-items: center;
+                    gap: 6px;
+                    transition: color 0.2s;
+                " onmouseover="this.style.color='#00d4ff'" onmouseout="this.style.color='#1e3a5f'">
+                    <i class="fas fa-dashboard"></i>
+                    <span>Main Dashboard</span>
+                </a>
+                <a href="analysis-checklist.html" style="
+                    color: #1e3a5f;
+                    text-decoration: none;
+                    font-size: 14px;
+                    display: flex;
+                    align-items: center;
+                    gap: 6px;
+                    transition: color 0.2s;
+                " onmouseover="this.style.color='#00d4ff'" onmouseout="this.style.color='#1e3a5f'">
+                    <i class="fas fa-clipboard-check"></i>
+                    <span>Analysis Checklist</span>
+                </a>
+                <a href="index.html" style="
+                    color: #1e3a5f;
+                    text-decoration: none;
+                    font-size: 14px;
+                    display: flex;
+                    align-items: center;
+                    gap: 6px;
+                    transition: color 0.2s;
+                " onmouseover="this.style.color='#00d4ff'" onmouseout="this.style.color='#1e3a5f'">
+                    <i class="fas fa-home"></i>
+                    <span>Documentation Hub</span>
+                </a>
+            </div>
+            
+            <!-- Branding -->
+            <div style="
+                display: flex;
+                align-items: center;
+                gap: 15px;
+            ">
+                <img src="../assets/images/vtx_logo_white.png" alt="Versatex" style="
+                    width: 30px;
+                    height: auto;
+                    background: #1e3a5f;
+                    padding: 5px;
+                    border-radius: 6px;
+                ">
+                <div>
+                    <div style="font-size: 12px; color: #6b7280;">© 2025 Versatex Analytics</div>
+                    <div style="font-size: 11px; color: #9ca3af;">Vendor Spend Analysis Platform</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Quick Tips -->
+        <div style="
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #e5e7eb;
+            text-align: center;
+        ">
+            <p style="
+                font-size: 12px;
+                color: #6b7280;
+                margin-bottom: 10px;
+            ">
+                <strong>Pro Tip:</strong> Use keyboard shortcuts for faster navigation
+            </p>
+            <div style="
+                display: flex;
+                justify-content: center;
+                gap: 20px;
+                flex-wrap: wrap;
+                font-size: 11px;
+                color: #9ca3af;
+            ">
+                <span><kbd style="
+                    background: #f3f4f6;
+                    padding: 2px 6px;
+                    border-radius: 4px;
+                    border: 1px solid #d1d5db;
+                    font-family: monospace;
+                ">Ctrl+K</kbd> Search</span>
+                <span><kbd style="
+                    background: #f3f4f6;
+                    padding: 2px 6px;
+                    border-radius: 4px;
+                    border: 1px solid #d1d5db;
+                    font-family: monospace;
+                ">Ctrl+D</kbd> Dark Mode</span>
+                <span><kbd style="
+                    background: #f3f4f6;
+                    padding: 2px 6px;
+                    border-radius: 4px;
+                    border: 1px solid #d1d5db;
+                    font-family: monospace;
+                ">1-9</kbd> Navigate Tabs</span>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Dark mode footer adjustment
+        const footerElement = document.querySelector('footer');
+        const footerLinks = footerElement.querySelectorAll('a');
+        const footerText = footerElement.querySelectorAll('div');
+        
+        function updateFooterTheme() {
+            if (document.body.classList.contains('dark-mode')) {
+                footerElement.style.background = '#1f2937';
+                footerElement.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.3)';
+                footerLinks.forEach(link => {
+                    link.style.color = '#e5e7eb';
+                    link.onmouseover = function() { this.style.color = '#00d4ff'; };
+                    link.onmouseout = function() { this.style.color = '#e5e7eb'; };
+                });
+            } else {
+                footerElement.style.background = 'white';
+                footerElement.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.08)';
+                footerLinks.forEach(link => {
+                    link.style.color = '#1e3a5f';
+                    link.onmouseover = function() { this.style.color = '#00d4ff'; };
+                    link.onmouseout = function() { this.style.color = '#1e3a5f'; };
+                });
+            }
+        }
+        
+        // Update footer theme when dark mode toggles
+        const existingThemeToggle = document.getElementById('themeToggle');
+        existingThemeToggle.addEventListener('click', () => {
+            setTimeout(updateFooterTheme, 50);
+        });
+        
+        // Initial theme check
+        updateFooterTheme();
+    </script>
+</body>
+</html>

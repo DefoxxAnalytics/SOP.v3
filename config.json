@@ -1,0 +1,187 @@
+{
+  "app": {
+    "name": "Versatex SOP Platform",
+    "version": "3.0.0",
+    "description": "Modern modular architecture for vendor spend analysis procedures",
+    "author": "Versatex Analytics Team",
+    "license": "Proprietary",
+    "environment": "development"
+  },
+  
+  "features": {
+    "enableTimeline": true,
+    "enableDecisionTool": true,
+    "enableHealthMonitor": true,
+    "enableAnalytics": true,
+    "enablePWA": true,
+    "enableOffline": true,
+    "enableDarkMode": false
+  },
+  
+  "modules": {
+    "timeline": {
+      "path": "modules/timeline/",
+      "entry": "timeline.js",
+      "styles": "timeline.css",
+      "version": "1.0.0",
+      "enabled": true,
+      "autoLoad": true,
+      "dependencies": []
+    },
+    "decisionTool": {
+      "path": "modules/decision-tool/",
+      "entry": "decision-tool.js",
+      "styles": "decision-tool.css",
+      "version": "1.0.0",
+      "enabled": true,
+      "autoLoad": false,
+      "dependencies": []
+    },
+    "healthMonitor": {
+      "path": "modules/health-monitor/",
+      "entry": "monitor.js",
+      "styles": "monitor.css",
+      "version": "1.0.0",
+      "enabled": true,
+      "autoLoad": false,
+      "dependencies": []
+    },
+    "analytics": {
+      "path": "modules/analytics/",
+      "entry": "index.js",
+      "version": "1.0.0",
+      "enabled": false,
+      "autoLoad": false,
+      "dependencies": []
+    }
+  },
+  
+  "api": {
+    "baseUrl": "/api/v3",
+    "timeout": 5000,
+    "retries": 3,
+    "endpoints": {
+      "content": "/content",
+      "modules": "/modules",
+      "analytics": "/analytics",
+      "export": "/export"
+    }
+  },
+  
+  "storage": {
+    "prefix": "sop_v3_",
+    "type": "localStorage",
+    "encryption": false,
+    "maxSize": 5242880
+  },
+  
+  "performance": {
+    "lazyLoadThreshold": 200,
+    "debounceDelay": 300,
+    "cacheExpiry": 3600000,
+    "maxConcurrentModules": 3,
+    "preloadModules": ["timeline"],
+    "imageLazyLoad": true
+  },
+  
+  "theme": {
+    "default": "navy-professional",
+    "available": ["navy-professional", "light", "dark", "high-contrast"],
+    "colors": {
+      "primary": "#003366",
+      "primaryLight": "#004080",
+      "primaryDark": "#002244",
+      "accent": "#0066CC",
+      "success": "#10b981",
+      "warning": "#f59e0b",
+      "danger": "#ef4444",
+      "info": "#3b82f6"
+    }
+  },
+  
+  "navigation": {
+    "sections": [
+      {
+        "id": "overview",
+        "title": "Overview",
+        "icon": "📋",
+        "order": 1
+      },
+      {
+        "id": "prerequisites",
+        "title": "Prerequisites",
+        "icon": "✅",
+        "order": 2
+      },
+      {
+        "id": "data-collection",
+        "title": "Data Collection",
+        "icon": "📥",
+        "order": 3
+      },
+      {
+        "id": "quality-assessment",
+        "title": "Quality Assessment",
+        "icon": "🔍",
+        "order": 4
+      },
+      {
+        "id": "data-cleansing",
+        "title": "Data Cleansing",
+        "icon": "🧹",
+        "order": 5
+      },
+      {
+        "id": "categorization",
+        "title": "Categorization",
+        "icon": "🏷️",
+        "order": 6
+      },
+      {
+        "id": "dashboard",
+        "title": "Dashboard Development",
+        "icon": "📊",
+        "order": 7
+      },
+      {
+        "id": "delivery",
+        "title": "Delivery",
+        "icon": "🚀",
+        "order": 8
+      },
+      {
+        "id": "quality",
+        "title": "Quality Management",
+        "icon": "✨",
+        "order": 9
+      },
+      {
+        "id": "risks",
+        "title": "Risk Management",
+        "icon": "⚠️",
+        "order": 10
+      },
+      {
+        "id": "appendices",
+        "title": "Appendices",
+        "icon": "📚",
+        "order": 11
+      }
+    ]
+  },
+  
+  "logging": {
+    "level": "debug",
+    "console": true,
+    "remote": false,
+    "remoteUrl": "/api/logs"
+  },
+  
+  "deployment": {
+    "environment": "development",
+    "baseUrl": "/SOPv3",
+    "cdnUrl": "",
+    "analyticsId": "",
+    "sentryDsn": ""
+  }
+}

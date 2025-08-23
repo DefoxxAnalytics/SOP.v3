@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PWA Installation Guide - Versatex SOP</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#003366">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1e3a5f 0%, #2a4a7f 100%);
+            color: white;
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #00d4ff;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .info-card {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        .feature {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #00d4ff;
+        }
+        .feature h3 {
+            color: #00d4ff;
+            margin-bottom: 10px;
+        }
+        .install-steps {
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid #00d4ff;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .step {
+            margin: 15px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+        .step::before {
+            content: attr(data-step);
+            position: absolute;
+            left: 0;
+            background: #00d4ff;
+            color: #003366;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        .browser-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .browser-card {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .browser-card i {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+        .status-supported {
+            background: #10b981;
+            color: white;
+        }
+        .status-partial {
+            background: #f59e0b;
+            color: white;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #10b981, #059669);
+            border: none;
+            color: white;
+            padding: 14px 28px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin: 20px auto;
+            display: block;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            text-align: center;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+        }
+        .icon-preview {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+        }
+        .icon-preview img {
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>📱 Install Versatex SOP as a Progressive Web App</h1>
+        
+        <div class="info-card">
+            <h2>What is a PWA?</h2>
+            <p>A Progressive Web App (PWA) provides a native app-like experience directly from your browser. Install Versatex SOP to access it instantly from your desktop or home screen, work offline, and receive updates automatically.</p>
+            
+            <div class="icon-preview">
+                <img src="assets/images/icon-192x192.png" alt="App Icon" width="96" height="96">
+            </div>
+        </div>
+        
+        <div class="info-card">
+            <h2>✨ PWA Features</h2>
+            <div class="feature-list">
+                <div class="feature">
+                    <h3><i class="fas fa-wifi-slash"></i> Offline Access</h3>
+                    <p>Work without an internet connection. All core features and content are cached locally.</p>
+                </div>
+                <div class="feature">
+                    <h3><i class="fas fa-rocket"></i> Instant Loading</h3>
+                    <p>Launch instantly from your desktop or home screen, no browser needed.</p>
+                </div>
+                <div class="feature">
+                    <h3><i class="fas fa-sync-alt"></i> Auto Updates</h3>
+                    <p>Receive updates automatically in the background when connected.</p>
+                </div>
+                <div class="feature">
+                    <h3><i class="fas fa-desktop"></i> Native Feel</h3>
+                    <p>Runs in its own window like a native application.</p>
+                </div>
+                <div class="feature">
+                    <h3><i class="fas fa-save"></i> Progress Saved</h3>
+                    <p>Your checklist progress and settings are saved locally.</p>
+                </div>
+                <div class="feature">
+                    <h3><i class="fas fa-bell"></i> Notifications</h3>
+                    <p>Get notified about important updates and milestones.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="info-card">
+            <h2>🚀 Installation Instructions</h2>
+            
+            <div class="install-steps">
+                <h3>Chrome / Edge / Brave</h3>
+                <div class="step" data-step="1">Navigate to the main application page</div>
+                <div class="step" data-step="2">Look for the install icon (➕) in the address bar</div>
+                <div class="step" data-step="3">Click "Install" when prompted</div>
+                <div class="step" data-step="4">The app will open in its own window</div>
+            </div>
+            
+            <div class="install-steps">
+                <h3>Firefox</h3>
+                <div class="step" data-step="1">Navigate to the main application page</div>
+                <div class="step" data-step="2">Click the menu button (☰)</div>
+                <div class="step" data-step="3">Select "Install Versatex SOP"</div>
+                <div class="step" data-step="4">Confirm the installation</div>
+            </div>
+            
+            <div class="install-steps">
+                <h3>Safari (iOS)</h3>
+                <div class="step" data-step="1">Open in Safari browser</div>
+                <div class="step" data-step="2">Tap the Share button (↗)</div>
+                <div class="step" data-step="3">Select "Add to Home Screen"</div>
+                <div class="step" data-step="4">Tap "Add" to confirm</div>
+            </div>
+            
+            <div class="install-steps">
+                <h3>Android</h3>
+                <div class="step" data-step="1">Open in Chrome or Edge</div>
+                <div class="step" data-step="2">Tap the menu button (⋮)</div>
+                <div class="step" data-step="3">Select "Install app" or "Add to Home screen"</div>
+                <div class="step" data-step="4">Confirm the installation</div>
+            </div>
+        </div>
+        
+        <div class="info-card">
+            <h2>🌐 Browser Support</h2>
+            <div class="browser-grid">
+                <div class="browser-card">
+                    <i class="fab fa-chrome" style="color: #4285f4;"></i>
+                    <h4>Chrome</h4>
+                    <span class="status-badge status-supported">Full Support</span>
+                </div>
+                <div class="browser-card">
+                    <i class="fab fa-edge" style="color: #0078d4;"></i>
+                    <h4>Edge</h4>
+                    <span class="status-badge status-supported">Full Support</span>
+                </div>
+                <div class="browser-card">
+                    <i class="fab fa-firefox" style="color: #ff7139;"></i>
+                    <h4>Firefox</h4>
+                    <span class="status-badge status-supported">Full Support</span>
+                </div>
+                <div class="browser-card">
+                    <i class="fab fa-safari" style="color: #006cff;"></i>
+                    <h4>Safari</h4>
+                    <span class="status-badge status-partial">iOS Only</span>
+                </div>
+                <div class="browser-card">
+                    <i class="fab fa-brave" style="color: #fb542b;"></i>
+                    <h4>Brave</h4>
+                    <span class="status-badge status-supported">Full Support</span>
+                </div>
+                <div class="browser-card">
+                    <i class="fab fa-opera" style="color: #ff1b2d;"></i>
+                    <h4>Opera</h4>
+                    <span class="status-badge status-supported">Full Support</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="info-card" style="text-align: center;">
+            <h2>Ready to Install?</h2>
+            <p>Click below to go to the main application and install it as a PWA.</p>
+            <a href="index.html" class="btn-primary">
+                <i class="fas fa-download"></i> Go to Application
+            </a>
+            <p style="margin-top: 20px; opacity: 0.8;">
+                <i class="fas fa-info-circle"></i> Already installed? Launch it from your desktop or home screen!
+            </p>
+        </div>
+    </div>
+    
+    <script>
+        // Check if already installed
+        if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone) {
+            document.querySelector('.btn-primary').innerHTML = '<i class="fas fa-check-circle"></i> Already Installed - Open App';
+        }
+        
+        // Listen for install prompt
+        window.addEventListener('beforeinstallprompt', (e) => {
+            console.log('App is installable');
+        });
+        
+        // Listen for successful install
+        window.addEventListener('appinstalled', () => {
+            document.querySelector('.btn-primary').innerHTML = '<i class="fas fa-check-circle"></i> Successfully Installed!';
+        });
+    </script>
+</body>
+</html>

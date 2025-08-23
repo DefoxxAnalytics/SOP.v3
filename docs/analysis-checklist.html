@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analysis Checklist - Versatex Analytics</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --navy: #1e3a5f;
+            --navy-light: #4a7ba7;
+            --accent: #00d4ff;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-500: #6b7280;
+            --gray-700: #374151;
+            --gray-900: #111827;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+            min-height: 100vh;
+            color: var(--gray-900);
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        /* Compact Header */
+        .header {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo {
+            width: 40px;
+            height: auto;
+            background: var(--navy);
+            padding: 5px;
+            border-radius: 8px;
+        }
+        
+        .title-section h1 {
+            font-size: 1.5rem;
+            color: var(--navy);
+            margin: 0;
+            font-weight: 700;
+        }
+        
+        .title-section p {
+            font-size: 0.85rem;
+            color: var(--gray-500);
+            margin: 0;
+        }
+        
+        /* Progress Bar */
+        .progress-section {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex: 1;
+            max-width: 400px;
+        }
+        
+        .progress-bar {
+            flex: 1;
+            height: 8px;
+            background: var(--gray-200);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--navy), var(--accent));
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        .progress-stats {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--navy);
+        }
+        
+        .stat-label {
+            font-size: 0.7rem;
+            color: var(--gray-500);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Quick Actions */
+        .quick-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .btn-primary {
+            background: var(--navy);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--navy-light);
+            transform: translateY(-1px);
+        }
+        
+        .btn-secondary {
+            background: var(--gray-100);
+            color: var(--gray-700);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--gray-200);
+        }
+        
+        /* Main Content */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Compact Phase Grid */
+        .phases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .phase-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+        
+        .phase-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+        }
+        
+        .phase-header {
+            background: linear-gradient(135deg, var(--navy), var(--navy-light));
+            color: white;
+            padding: 12px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .phase-header:hover {
+            background: linear-gradient(135deg, var(--navy-light), var(--accent));
+        }
+        
+        .phase-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .phase-icon {
+            width: 30px;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+        
+        .phase-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+        
+        .phase-meta {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .phase-progress {
+            font-size: 0.85rem;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 2px 8px;
+            border-radius: 12px;
+        }
+        
+        .phase-toggle {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .phase-toggle.collapsed {
+            transform: rotate(180deg);
+        }
+        
+        .phase-body {
+            padding: 15px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .phase-body.collapsed {
+            display: none;
+        }
+        
+        /* Compact Checklist Items */
+        .checklist-group {
+            margin-bottom: 12px;
+        }
+        
+        .group-title {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--gray-500);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid var(--gray-200);
+        }
+        
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            padding: 6px 0;
+            transition: background 0.2s;
+        }
+        
+        .checklist-item:hover {
+            background: var(--gray-50);
+            margin: 0 -8px;
+            padding: 6px 8px;
+            border-radius: 6px;
+        }
+        
+        .checkbox-wrapper {
+            position: relative;
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+        
+        .checkbox-input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        
+        .checkbox-custom {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 18px;
+            height: 18px;
+            background: white;
+            border: 2px solid var(--gray-300);
+            border-radius: 4px;
+            transition: all 0.2s;
+            pointer-events: none;
+        }
+        
+        .checkbox-input:checked ~ .checkbox-custom {
+            background: var(--navy);
+            border-color: var(--navy);
+        }
+        
+        .checkbox-input:checked ~ .checkbox-custom::after {
+            content: '✓';
+            position: absolute;
+            top: -1px;
+            left: 3px;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .checklist-label {
+            font-size: 0.85rem;
+            color: var(--gray-700);
+            line-height: 1.4;
+            flex: 1;
+        }
+        
+        .checklist-item.completed .checklist-label {
+            text-decoration: line-through;
+            color: var(--gray-400);
+        }
+        
+        .item-badge {
+            font-size: 0.7rem;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+        
+        .badge-critical {
+            background: var(--danger);
+            color: white;
+        }
+        
+        .badge-important {
+            background: var(--warning);
+            color: white;
+        }
+        
+        .badge-optional {
+            background: var(--gray-200);
+            color: var(--gray-600);
+        }
+        
+        /* Footer Actions */
+        .footer {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        }
+        
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .footer-links a {
+            color: var(--navy);
+            text-decoration: none;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+        
+        /* Floating Action Button */
+        .fab {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 56px;
+            height: 56px;
+            background: var(--accent);
+            color: var(--navy);
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 212, 255, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+        
+        .fab:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0, 212, 255, 0.6);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .phases-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .progress-section {
+                max-width: 100%;
+            }
+        }
+        
+        /* Print Styles */
+        @media print {
+            .header {
+                position: relative;
+            }
+            
+            .phase-body {
+                max-height: none !important;
+                display: block !important;
+            }
+            
+            .btn, .fab {
+                display: none;
+            }
+        }
+        
+        /* Animations */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .phase-card {
+            animation: slideIn 0.5s ease forwards;
+            opacity: 0;
+        }
+        
+        .phase-card:nth-child(1) { animation-delay: 0.1s; }
+        .phase-card:nth-child(2) { animation-delay: 0.15s; }
+        .phase-card:nth-child(3) { animation-delay: 0.2s; }
+        .phase-card:nth-child(4) { animation-delay: 0.25s; }
+        .phase-card:nth-child(5) { animation-delay: 0.3s; }
+        .phase-card:nth-child(6) { animation-delay: 0.35s; }
+        .phase-card:nth-child(7) { animation-delay: 0.4s; }
+        .phase-card:nth-child(8) { animation-delay: 0.45s; }
+    </style>
+</head>
+<body>
+    <!-- Compact Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <img src="../assets/images/vtx_logo_white.png" alt="Versatex" class="logo">
+                <div class="title-section">
+                    <h1>Analysis Checklist</h1>
+                    <p>22-Day Vendor Spend Analysis</p>
+                </div>
+            </div>
+            
+            <div class="progress-section">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="mainProgress" style="width: 0%"></div>
+                </div>
+                <div class="progress-stats">
+                    <div class="stat">
+                        <div class="stat-value" id="progressPercent">0%</div>
+                        <div class="stat-label">Complete</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value" id="itemsComplete">0/0</div>
+                        <div class="stat-label">Tasks</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="quick-actions">
+                <button class="btn btn-secondary" onclick="expandAll()">
+                    <i class="fas fa-expand"></i> Expand
+                </button>
+                <button class="btn btn-secondary" onclick="collapseAll()">
+                    <i class="fas fa-compress"></i> Collapse
+                </button>
+                <button class="btn btn-primary" onclick="resetAll()">
+                    <i class="fas fa-redo"></i> Reset
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <div class="container">
+        <div class="phases-grid">
+            <!-- Phase 1: Data Collection -->
+            <div class="phase-card">
+                <div class="phase-header" onclick="togglePhase(this)">
+                    <div class="phase-info">
+                        <div class="phase-icon">📊</div>
+                        <div class="phase-title">Data Collection</div>
+                    </div>
+                    <div class="phase-meta">
+                        <span class="phase-progress">Days 1-5</span>
+                        <button class="phase-toggle">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="phase-body">
+                    <div class="checklist-group">
+                        <div class="group-title">Required Fields</div>
+                        <div class="checklist-item">
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" class="checkbox-input" id="dc1">
+                                <span class="checkbox-custom"></span>
+                            </div>
+                            <label for="dc1" class="checklist-label">
+                                Transaction ID/Invoice Number
+                                <span class="item-badge badge-critical">Critical</span>
+                            </label>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" class="checkbox-input" id="dc2">
+                                <span class="checkbox-custom"></span>
+                            </div>
+                            <label for="dc2" class="checklist-label">
+                                Supplier Name & ID
+                                <span class="item-badge badge-critical">Critical</span>
+                            </label>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" class="checkbox-input" id="dc3">
+                                <span class="checkbox-custom"></span>
+                            </div>
+                            <label for="dc3" class="checklist-label">
+                                Spend Amount (Currency)
+                                <span class="item-badge badge-critical">Critical</span>
+                            </label>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" class="checkbox-input" id="dc4">
+                                <span class="checkbox-custom"></span>
+                            </div>
+                            <label for="dc4" class="checklist-label">
+                                Transaction Date
+                                <span class="item-badge badge-critical">Critical</span>
+                            </label>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" class="checkbox-input" id="dc5">
+                                <span class="checkbox-custom"></span>
+                            </div>
+                            <label for="dc5" class="checklist-label">
+                                Description (Product/Service)
+                                <span class="item-badge badge-critical">Critical</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="checklist-group">
+                        <div class="group-title">Data Sources</div>
+                        <div class="checklist-item">
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" class="checkbox-input" id="dc6">
+                                <span class="checkbox-custom"></span>
+                            </div>
+                            <label for="dc6" class="checklist-label">ERP data extracted</label>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" class="checkbox-input" id="dc7">
+                                <span class="checkbox-custom"></span>
+                            </div>
+                            <label for="dc7" class="checklist-label">P-Card transactions collected</label>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" class="checkbox-input" id="dc8">
+                                <span class="checkbox-custom"></span>
+                            </div>
+                            <label for="dc8" class="checklist-label">Contract database reviewed</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Phase 2: Quality Assessment -->
+            <div class="phase-card">
+                <div class="phase-header" onclick="togglePhase(this)">
+                    <div class="phase-info">
+                        <div class="phase-icon">✅</div>
+                        <div class="phase-title">Quality Assessment</div>
+                    </div>
+                    <div class="phase-meta">
+                        <span class="phase-progress">Days 6-8</span>
+                        <button class="phase-toggle">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="phase-body">
+                    <div class="checklist-group">
+                        <div class="group-title">Data Validation</div>
+                        <div class="checklist-item">
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" class="checkbox-input" id="qa1">
+                                <span class="checkbox-custom"></span>
+                            </div>
+                            <label for="qa1" class="checklist-label">
+                                Completeness check (>95%)
+                                <span class="item-badge badge-important">Important</span>
+                            </label>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" class="checkbox-input" id="qa2">
+                                <span class="checkbox-custom"></span>
+                            </div>
+                            <label for="qa2" class="checklist-label">Duplicate detection run</label>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" class="checkbox-input" id="qa3">
+                                <span class="checkbox-custom"></span>
+                            </div>
+                            <label for="qa3" class="checklist-label">Currency standardization</label>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" class="checkbox-input" id="qa4">
+                                <span class="checkbox-custom"></span>
+                            </div>
+                            <label for="qa4" class="checklist-label">Outlier analysis completed</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Phase 3: Data Cleansing -->
+            <div class="phase-card">
+                <div class="phase-header" onclick="togglePhase(this)">
+                    <div class="phase-info">
+                        <div class="phase-icon">🧹</div>
+                        <div class="phase-title">Data Cleansing</div>
+                    </div>
+                    <div class="phase-meta">
+                        <span class="phase-progress">Days 9-11</span>
+                        <button class="phase-toggle">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="phase-body">
+                    <div class="checklist-group">
+                        <div class="group-title">Standardization</div>
+                        <div class="checklist-item">
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" class="checkbox-input" id="cl1">
+                                <span class="checkbox-custom"></span>
+                            </div>
+                            <label for="cl1" class="checklist-label">Supplier names normalized</label>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" class="checkbox-input" id="cl2">
+                                <span class="checkbox-custom"></span>
+                            </div>
+                            <label for="cl2" class="checklist-label">Parent-child relationships mapped</label>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" class="checkbox-input" id="cl3">
+                                <span class="checkbox-custom"></span>
+                            </div>
+                            <label for="cl3" class="checklist-label">Missing data handled</label>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" class="checkbox-input" id="cl4">
+                                <span class="checkbox-custom"></span>
+                            </div>
+                            <label for="cl4" class="checklist-label">Tax excluded from spend</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Phase 4: Categorization -->
+            <div class="phase-card">
+                <div class="phase-header" onclick="togglePhase(this)">
+                    <div class="phase-info">
+                        <div class="phase-icon">🏷️</div>
+                        <div class="phase-title">Categorization</div>
+                    </div>
+                    <div class="phase-meta">
+                        <span class="phase-progress">Days 12-14</span>
+                        <button class="phase-toggle">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="phase-body">
+                    <div class="checklist-group">
+                        <div class="group-title">Taxonomy Levels</div>
+                        <div class="checklist-item">
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" class="checkbox-input" id="cat1">
+                                <span class="checkbox-custom"></span>
+                            </div>
+                            <label for="cat1" class="checklist-label">
+                                Level 1: Direct/Indirect
+                                <span class="item-badge badge-critical">Critical</span>
+                            </label>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" class="checkbox-input" id="cat2">
+                                <span class="checkbox-custom"></span>
+                            </div>
+                            <label for="cat2" class="checklist-label">
+                                Level 2: Category Groups
+                                <span class="item-badge badge-critical">Critical</span>
+                            </label>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" class="checkbox-input" id="cat3">
+                                <span class="checkbox-custom"></span>
+                            </div>
+                            <label for="cat3" class="checklist-label">Level 3: Categories</label>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" class="checkbox-input" id="cat4">
+                                <span class="checkbox-custom"></span>
+                            </div>
+                            <label for="cat4" class="checklist-label">Level 4: Sub-categories</label>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" class="checkbox-input" id="cat5">
+                                <span class="checkbox-custom"></span>
+                            </div>
+                            <label for="cat5" class="checklist-label">Level 5: Commodities</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Phase 5: Analysis -->
+            <div class="phase-card">
+                <div class="phase-header" onclick="togglePhase(this)">
+                    <div class="phase-info">
+                        <div class="phase-icon">📈</div>
+                        <div class="phase-title">Analysis</div>
+                    </div>
+                    <div class="phase-meta">
+                        <span class="phase-progress">Days 15-17</span>
+                        <button class="phase-toggle">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="phase-body">
+                    <div class="checklist-group">
+                        <div class="group-title">Key Analyses</div>
+                        <div class="checklist-item">
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" class="checkbox-input" id="an1">
+                                <span class="checkbox-custom"></span>
+                            </div>
+                            <label for="an1" class="checklist-label">Spend concentration analysis</label>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" class="checkbox-input" id="an2">
+                                <span class="checkbox-custom"></span>
+                            </div>
+                            <label for="an2" class="checklist-label">Pareto analysis (80/20)</label>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" class="checkbox-input" id="an3">
+                                <span class="checkbox-custom"></span>
+                            </div>
+                            <label for="an3" class="checklist-label">Maverick spend identified</label>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" class="checkbox-input" id="an4">
+                                <span class="checkbox-custom"></span>
+                            </div>
+                            <label for="an4" class="checklist-label">Savings opportunities calculated</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Phase 6: Dashboard Development -->
+            <div class="phase-card">
+                <div class="phase-header" onclick="togglePhase(this)">
+                    <div class="phase-info">
+                        <div class="phase-icon">📊</div>
+                        <div class="phase-title">Dashboard</div>
+                    </div>
+                    <div class="phase-meta">
+                        <span class="phase-progress">Days 18-19</span>
+                        <button class="phase-toggle">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="phase-body">
+                    <div class="checklist-group">
+                        <div class="group-title">Power BI Components</div>
+                        <div class="checklist-item">
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" class="checkbox-input" id="db1">
+                                <span class="checkbox-custom"></span>
+                            </div>
+                            <label for="db1" class="checklist-label">Executive summary page</label>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" class="checkbox-input" id="db2">
+                                <span class="checkbox-custom"></span>
+                            </div>
+                            <label for="db2" class="checklist-label">Category deep-dive views</label>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" class="checkbox-input" id="db3">
+                                <span class="checkbox-custom"></span>
+                            </div>
+                            <label for="db3" class="checklist-label">Supplier analysis page</label>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" class="checkbox-input" id="db4">
+                                <span class="checkbox-custom"></span>
+                            </div>
+                            <label for="db4" class="checklist-label">Savings tracker integrated</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Phase 7: Review & QA -->
+            <div class="phase-card">
+                <div class="phase-header" onclick="togglePhase(this)">
+                    <div class="phase-info">
+                        <div class="phase-icon">🔍</div>
+                        <div class="phase-title">Review & QA</div>
+                    </div>
+                    <div class="phase-meta">
+                        <span class="phase-progress">Day 20</span>
+                        <button class="phase-toggle">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="phase-body">
+                    <div class="checklist-group">
+                        <div class="group-title">Final Checks</div>
+                        <div class="checklist-item">
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" class="checkbox-input" id="rv1">
+                                <span class="checkbox-custom"></span>
+                            </div>
+                            <label for="rv1" class="checklist-label">Stakeholder review completed</label>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" class="checkbox-input" id="rv2">
+                                <span class="checkbox-custom"></span>
+                            </div>
+                            <label for="rv2" class="checklist-label">Data accuracy validated</label>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" class="checkbox-input" id="rv3">
+                                <span class="checkbox-custom"></span>
+                            </div>
+                            <label for="rv3" class="checklist-label">Dashboard tested</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Phase 8: Delivery -->
+            <div class="phase-card">
+                <div class="phase-header" onclick="togglePhase(this)">
+                    <div class="phase-info">
+                        <div class="phase-icon">🚀</div>
+                        <div class="phase-title">Delivery</div>
+                    </div>
+                    <div class="phase-meta">
+                        <span class="phase-progress">Days 21-22</span>
+                        <button class="phase-toggle">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="phase-body">
+                    <div class="checklist-group">
+                        <div class="group-title">Deliverables</div>
+                        <div class="checklist-item">
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" class="checkbox-input" id="dl1">
+                                <span class="checkbox-custom"></span>
+                            </div>
+                            <label for="dl1" class="checklist-label">Executive presentation ready</label>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" class="checkbox-input" id="dl2">
+                                <span class="checkbox-custom"></span>
+                            </div>
+                            <label for="dl2" class="checklist-label">Dashboard deployed</label>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" class="checkbox-input" id="dl3">
+                                <span class="checkbox-custom"></span>
+                            </div>
+                            <label for="dl3" class="checklist-label">Documentation provided</label>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" class="checkbox-input" id="dl4">
+                                <span class="checkbox-custom"></span>
+                            </div>
+                            <label for="dl4" class="checklist-label">Training completed</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <div class="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="../index.html"><i class="fas fa-dashboard"></i> Main Dashboard</a>
+                <a href="quick-reference.html"><i class="fas fa-bolt"></i> Quick Reference</a>
+                <a href="index.html"><i class="fas fa-home"></i> Docs Hub</a>
+            </div>
+            <div>
+                <span style="color: var(--gray-500); font-size: 0.85rem;">© 2025 Versatex Analytics</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Floating Action Button -->
+    <button class="fab" onclick="printChecklist()">
+        <i class="fas fa-print"></i>
+    </button>
+    
+    <script>
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            loadProgress();
+            updateProgress();
+            
+            // Add change listeners to all checkboxes
+            const checkboxes = document.querySelectorAll('.checkbox-input');
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    saveProgress();
+                    updateProgress();
+                    if (this.checked) {
+                        this.closest('.checklist-item').classList.add('completed');
+                    } else {
+                        this.closest('.checklist-item').classList.remove('completed');
+                    }
+                });
+            });
+        });
+        
+        // Progress Management
+        function updateProgress() {
+            const total = document.querySelectorAll('.checkbox-input').length;
+            const checked = document.querySelectorAll('.checkbox-input:checked').length;
+            const percentage = total > 0 ? Math.round((checked / total) * 100) : 0;
+            
+            document.getElementById('mainProgress').style.width = percentage + '%';
+            document.getElementById('progressPercent').textContent = percentage + '%';
+            document.getElementById('itemsComplete').textContent = `${checked}/${total}`;
+            
+            // Update phase progress
+            document.querySelectorAll('.phase-card').forEach(card => {
+                const phaseTotal = card.querySelectorAll('.checkbox-input').length;
+                const phaseChecked = card.querySelectorAll('.checkbox-input:checked').length;
+                const phaseProgress = card.querySelector('.phase-progress');
+                if (phaseProgress && phaseTotal > 0) {
+                    const originalText = phaseProgress.textContent.split(' - ')[0];
+                    phaseProgress.textContent = `${originalText} - ${phaseChecked}/${phaseTotal}`;
+                }
+            });
+        }
+        
+        function saveProgress() {
+            const checkboxStates = {};
+            document.querySelectorAll('.checkbox-input').forEach(checkbox => {
+                checkboxStates[checkbox.id] = checkbox.checked;
+            });
+            localStorage.setItem('analysisChecklistProgress', JSON.stringify(checkboxStates));
+        }
+        
+        function loadProgress() {
+            const saved = localStorage.getItem('analysisChecklistProgress');
+            if (saved) {
+                const checkboxStates = JSON.parse(saved);
+                Object.keys(checkboxStates).forEach(id => {
+                    const checkbox = document.getElementById(id);
+                    if (checkbox) {
+                        checkbox.checked = checkboxStates[id];
+                        if (checkbox.checked) {
+                            checkbox.closest('.checklist-item').classList.add('completed');
+                        }
+                    }
+                });
+            }
+        }
+        
+        // Phase Toggle
+        function togglePhase(header) {
+            const body = header.nextElementSibling;
+            const toggle = header.querySelector('.phase-toggle');
+            body.classList.toggle('collapsed');
+            toggle.classList.toggle('collapsed');
+        }
+        
+        // Bulk Actions
+        function expandAll() {
+            document.querySelectorAll('.phase-body').forEach(body => {
+                body.classList.remove('collapsed');
+            });
+            document.querySelectorAll('.phase-toggle').forEach(toggle => {
+                toggle.classList.remove('collapsed');
+            });
+        }
+        
+        function collapseAll() {
+            document.querySelectorAll('.phase-body').forEach(body => {
+                body.classList.add('collapsed');
+            });
+            document.querySelectorAll('.phase-toggle').forEach(toggle => {
+                toggle.classList.add('collapsed');
+            });
+        }
+        
+        function resetAll() {
+            if (confirm('Are you sure you want to reset all progress?')) {
+                document.querySelectorAll('.checkbox-input').forEach(checkbox => {
+                    checkbox.checked = false;
+                    checkbox.closest('.checklist-item').classList.remove('completed');
+                });
+                saveProgress();
+                updateProgress();
+            }
+        }
+        
+        function printChecklist() {
+            expandAll();
+            window.print();
+        }
+    </script>
+</body>
+</html>

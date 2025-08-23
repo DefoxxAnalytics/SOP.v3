@@ -1,0 +1,35 @@
+{
+  "id": "prerequisites",
+  "title": "Prerequisites & Setup",
+  "subtitle": "Initial requirements and system configuration",
+  "lastUpdated": "2025-01-21",
+  "content": "<div class='prerequisites-content'><h2>Prerequisites Checklist</h2><p>Before beginning the vendor spend analysis process, ensure all prerequisites are met and systems are properly configured.</p><h3>System Requirements</h3><ul class='checklist'><li><input type='checkbox' id='prereq-1'> <label for='prereq-1'>Power BI Desktop (Latest version)</label></li><li><input type='checkbox' id='prereq-2'> <label for='prereq-2'>Microsoft Excel 2016 or later</label></li><li><input type='checkbox' id='prereq-3'> <label for='prereq-3'>Access to SharePoint/Teams for collaboration</label></li><li><input type='checkbox' id='prereq-4'> <label for='prereq-4'>SQL Server Management Studio (optional)</label></li><li><input type='checkbox' id='prereq-5'> <label for='prereq-5'>Python 3.8+ with pandas (for advanced processing)</label></li></ul><h3>Data Requirements</h3><div class='requirement-card'><h4>Minimum Data Fields Required</h4><ul><li>Vendor Name</li><li>Vendor ID/Number</li><li>Invoice Number</li><li>Invoice Date</li><li>PO Number</li><li>Line Item Description</li><li>Spend Amount</li><li>GL Account</li><li>Cost Center</li><li>Department</li></ul></div><h3>Access & Permissions</h3><ul class='checklist'><li><input type='checkbox' id='access-1'> <label for='access-1'>Read access to source data systems</label></li><li><input type='checkbox' id='access-2'> <label for='access-2'>Write access to output folders</label></li><li><input type='checkbox' id='access-3'> <label for='access-3'>Power BI workspace admin rights</label></li><li><input type='checkbox' id='access-4'> <label for='access-4'>SharePoint site access</label></li></ul><h3>Team Setup</h3><div class='info-box'><i class='fas fa-users'></i><div><h4>Required Team Members</h4><ul><li><strong>Data Analyst:</strong> Primary person conducting analysis</li><li><strong>Business SME:</strong> Category expertise and validation</li><li><strong>IT Support:</strong> System access and technical issues</li><li><strong>Project Manager:</strong> Timeline and deliverables tracking</li></ul></div></div><h3>Initial Setup Steps</h3><ol class='setup-steps'><li><strong>Create Project Folder Structure</strong><pre>ProjectName/\n├── 01_RawData/\n├── 02_CleanedData/\n├── 03_Analysis/\n├── 04_Dashboard/\n├── 05_Documentation/\n└── 06_Archive/</pre></li><li><strong>Configure Power BI Settings</strong><ul><li>Set data source privacy levels</li><li>Configure auto-recovery options</li><li>Set regional settings for currency</li></ul></li><li><strong>Establish Communication Channels</strong><ul><li>Create Teams channel or Slack workspace</li><li>Schedule weekly status meetings</li><li>Set up shared calendar for milestones</li></ul></li></ol><div class='warning-box'><i class='fas fa-exclamation-triangle'></i><p><strong>Important:</strong> Do not proceed to data collection until all prerequisites are confirmed. Missing requirements will cause delays in later phases.</p></div></div>",
+  "checklistItems": [
+    "prereq-1",
+    "prereq-2",
+    "prereq-3",
+    "prereq-4",
+    "prereq-5",
+    "access-1",
+    "access-2",
+    "access-3",
+    "access-4"
+  ],
+  "resources": [
+    {
+      "title": "Power BI Installation Guide",
+      "type": "document",
+      "url": "/assets/documents/powerbi-setup.pdf"
+    },
+    {
+      "title": "Folder Structure Template",
+      "type": "template",
+      "url": "/assets/templates/folder-structure.zip"
+    },
+    {
+      "title": "Data Requirements Checklist",
+      "type": "document",
+      "url": "/assets/documents/data-requirements.xlsx"
+    }
+  ]
+}

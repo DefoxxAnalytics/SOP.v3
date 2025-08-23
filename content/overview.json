@@ -1,0 +1,21 @@
+{
+  "id": "overview",
+  "title": "Data Analysis Procedure Overview",
+  "subtitle": "Vendor Spend Analysis & Dashboard Creation",
+  "lastUpdated": "2025-01-21",
+  "content": "<div class='overview-content'><h2>Welcome to Versatex SOP Platform</h2><p>This modern, modular platform provides comprehensive Standard Operating Procedures for vendor spend analysis and dashboard creation.</p><div class='feature-grid'><div class='feature-card'><i class='fas fa-calendar-check'></i><h3>22-Day Delivery</h3><p>Complete analysis in 22 business days (4 weeks + 2 days)</p></div><div class='feature-card'><i class='fas fa-layer-group'></i><h3>5-Level Taxonomy</h3><p>Industry-standard categorization framework for spend analysis</p></div><div class='feature-card'><i class='fas fa-chart-line'></i><h3>Real-time Progress</h3><p>Track every step with weighted milestone tracking</p></div></div><h2>Process Overview</h2><p>The vendor spend analysis process consists of 8 main phases:</p><ol><li><strong>Prerequisites & Setup</strong> - Initial requirements and system configuration</li><li><strong>Data Collection</strong> - Gathering vendor spend data from multiple sources</li><li><strong>Quality Assessment</strong> - Evaluating data completeness and accuracy</li><li><strong>Data Cleansing</strong> - Standardizing and cleaning the data</li><li><strong>Categorization</strong> - Applying 5-level taxonomy framework</li><li><strong>Dashboard Development</strong> - Building Power BI visualizations</li><li><strong>Delivery & Implementation</strong> - Deploying to production</li><li><strong>Quality Management</strong> - Ongoing monitoring and improvements</li></ol><h2>Timeline</h2><p>The complete process typically takes <strong>20-22 business days</strong> from data receipt to dashboard delivery.</p><div class='info-box'><i class='fas fa-info-circle'></i><p>Use the navigation menu to explore each phase in detail. Interactive tools and templates are available throughout the process.</p></div></div>",
+  "checklistItems": [],
+  "relatedModules": ["timeline"],
+  "resources": [
+    {
+      "title": "Process Map",
+      "type": "document",
+      "url": "/assets/documents/process-map.pdf"
+    },
+    {
+      "title": "Quick Start Guide",
+      "type": "document",
+      "url": "/assets/documents/quick-start.pdf"
+    }
+  ]
+}
